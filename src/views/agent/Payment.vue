@@ -50,7 +50,7 @@ const submitPayment = () => {
         </li>
         <li class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
           <div>
-            <span class="text-surface-900 dark:text-surface-0 font-bold mr-2 mb-1 md:mb-0" style="font-size: 24px;">Amount :</span>
+            <span class="text-surface-900 dark:text-surface-0 font-bold mr-2 mb-1 md:mb-0" style="font-size: 24px;">Amount Paid :</span>
           </div>
           <div class="mt-2 md:mt-0 ml-0 md:ml-20 flex items-center">
             <span class="ml-4 font-medium" style="font-size: 24px;">{{ formatCurrency(20) }}</span>
@@ -59,14 +59,6 @@ const submitPayment = () => {
         <li class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
           <div>
             <span class="text-surface-900 dark:text-surface-0 font-bold mr-2 mb-1 md:mb-0" style="font-size: 24px;">Amount Payables :</span>
-          </div>
-          <div class="mt-2 md:mt-0 ml-0 md:ml-20 flex items-center">
-            <span class="ml-4 font-medium" style="font-size: 24px;">{{ formatCurrency(20) }}</span>
-          </div>
-        </li>
-        <li class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
-          <div>
-            <span class="text-surface-900 dark:text-surface-0 font-bold mr-2 mb-1 md:mb-0" style="font-size: 24px;">Amount Payment :</span>
           </div>
           <div class="mt-2 md:mt-0 ml-0 md:ml-20 flex items-center">
             <span class="ml-4 font-medium" style="font-size: 24px;">{{ formatCurrency(20) }}</span>

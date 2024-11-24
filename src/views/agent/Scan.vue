@@ -1,8 +1,37 @@
 <script setup>
-import { useLayout } from "@/layout/composables/layout";
-import { onBeforeMount, ref } from "vue";
+import { ref } from 'vue';
+import { QrcodeStream } from 'vue3-qrcode-reader';
 
-const { getPrimary, getSurface, isDarkTheme } = useLayout();
+const error = ref('');
+const decodedString = ref('');
+const torch = ref(false);
+
+const onInit = async (promise) => {
+  try {
+    const { capabilities } = await promise;
+
+  } catch (err) {
+    if (err.name === 'NotAllowedError') {
+      error.value = "User denied camera access permission";
+    } else if (err.name === 'NotFoundError') {
+      error.value = "No suitable camera device installed";
+    } else if (err.name === 'NotSupportedError') {
+      error.value = "Page is not served over HTTPS (or localhost)";
+    } else if (err.name === 'NotReadableError') {
+      error.value = "Maybe camera is already in use";
+    } else if (err.name === 'OverconstrainedError') {
+      error.value = "Did you request the front camera although there is none?";
+    } else if (err.name === 'StreamApiNotSupportedError') {
+      error.value = "Browser seems to be lacking features";
+    }
+  }
+};
+
+const onDecode = (decodedStr) => {
+  decodedString.value = decodedStr;
+
+  window.location.replace(decodedString.value);
+};
 </script>
 
 <template>
@@ -10,9 +39,10 @@ const { getPrimary, getSurface, isDarkTheme } = useLayout();
     <h1 class="text-4xl font-bold mb-6" style="color: #899499">Scanner</h1>
   </div>
 
-  <div class="card shadow-md flex justify-center items-center" style="height: 550px;" >
-    <!-- Adjust height as needed and center the icon -->
-    <span class="pi pi-camera text-6xl" style="font-size: 600px;"></span>
+  <div class="card shadow-md flex justify-center items-center" style="height: 550px;">
+    <p>{{ error }}</p>
+    <p>{{ decodedString }}</p>
+    <button @click="torch = !torch"></button>
+    <qrcode-stream @init="onInit" @decode="onDecode" :torch="torch" />
   </div>
 </template>
-
