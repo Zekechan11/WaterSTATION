@@ -30,7 +30,7 @@ const onInit = async (promise) => {
 const onDecode = (decodedStr) => {
   decodedString.value = decodedStr;
 
-  window.location.replace(decodedString.value);
+  window.location.replace(`/agent/payment/${decodedString.value}`);
 };
 </script>
 
@@ -41,7 +41,7 @@ const onDecode = (decodedStr) => {
 
   <div class="card shadow-md flex justify-center items-center" style="height: 550px;">
     <p>{{ error }}</p>
-    <p>{{ decodedString }}</p>
+    <!-- <p>{{ decodedString }}</p> -->
     <button @click="torch = !torch"></button>
     <qrcode-stream @init="onInit" @decode="onDecode" :torch="torch" />
   </div>

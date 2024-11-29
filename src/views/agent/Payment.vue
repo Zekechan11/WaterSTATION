@@ -1,31 +1,35 @@
 <script setup>
+import { ref } from 'vue';
 import { useLayout } from "@/layout/composables/layout";
-import { CustomerService } from '@/service/CustomerService';
-import { onBeforeMount, ref } from 'vue';
+import { useRoute } from 'vue-router';
 
 const { getPrimary, getSurface, isDarkTheme } = useLayout();
-const dateFrozen = ref(false);
-const customers2 = ref(null);
-const activeTab = ref('purchase'); // Add a variable for the active tab
 
-onBeforeMount(() => {
-    CustomerService.getCustomersLarge().then((data) => (customers2.value = data));
+
+const customer = ref({
+  firstName: "John",
+  lastName: "Doe",
+  amountPayable: 20
 });
 
-const formatCurrency = (value) => {
-  return value.toLocaleString("en-US", { style: "currency", currency: "PHP" });
-};
+const route = useRoute(); // Get the route object
+const slug = route.params.slug;
 
 // Method to handle payment submission
 const submitPayment = () => {
   console.log("Payment submitted!");
   // Add your payment submission logic here (API call, form processing, etc.)
 };
+
+const formatCurrency = (value) => {
+  return value.toLocaleString("en-US", { style: "currency", currency: "PHP" });
+};
 </script>
 
 <template>
-  <div class="space">
-    <h1 class="text-4xl font-bold mb-6" style="color: #899499;">Zeke</h1>  
+
+<div class="space">
+  <h1>{{ slug }}'s Payment</h1>
   </div>
 
   <div class="card shadow-md flex flex-col justify-between" style="height: 565px">
@@ -37,7 +41,12 @@ const submitPayment = () => {
             <span class="text-surface-900 dark:text-surface-0 font-bold mr-2 mb-1 md:mb-0" style="font-size: 24px;">Gallons Returned :</span>
           </div>
           <div class="mt-2 md:mt-0 flex items-center">
-            <span class="ml-4 font-medium" style="font-size: 24px;">50</span>
+            <input class="ml-4 font-medium" style="font-size: 24px;border: solid 1px;"
+            id="gallonsReturned"
+            type="number"
+            v-model="customer.gallonsReturned"
+            min="0"
+          />
           </div>
         </li>
         <li class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
@@ -45,7 +54,12 @@ const submitPayment = () => {
             <span class="text-surface-900 dark:text-surface-0 font-bold mr-2 mb-1 md:mb-0" style="font-size: 24px;">Gallons Deliver :</span>
           </div>
           <div class="mt-2 md:mt-0 ml-0 md:ml-20 flex items-center">
-            <span class="ml-4 font-medium" style="font-size: 24px;">10</span>
+            <input class="ml-4 font-medium" style="font-size: 24px;border: solid 1px;"
+            id="gallonsDelivered"
+            type="number"
+            v-model="customer.gallonsDelivered"
+            min="0"
+          />
           </div>
         </li>
         <li class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
@@ -53,7 +67,12 @@ const submitPayment = () => {
             <span class="text-surface-900 dark:text-surface-0 font-bold mr-2 mb-1 md:mb-0" style="font-size: 24px;">Amount Paid :</span>
           </div>
           <div class="mt-2 md:mt-0 ml-0 md:ml-20 flex items-center">
-            <span class="ml-4 font-medium" style="font-size: 24px;">{{ formatCurrency(20) }}</span>
+            <input class="ml-4 font-medium" style="font-size: 24px;border: solid 1px;"
+            id="amountPaid"
+            type="number"
+            v-model="customer.amountPaid"
+            min="0"
+          />
           </div>
         </li>
         <li class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
@@ -73,4 +92,5 @@ const submitPayment = () => {
       </button>
     </div>
   </div>
+  
 </template>

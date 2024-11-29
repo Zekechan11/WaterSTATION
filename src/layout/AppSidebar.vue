@@ -6,6 +6,8 @@ import AppMenu from './AppMenu.vue';
 const router = useRouter();
 
 const Logout = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("role");
     router.push('/auth/login');
 };
 </script>

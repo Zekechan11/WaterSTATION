@@ -5,6 +5,8 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 
 const Logout = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("role");
     router.push('/auth/login');
 };
 </script>

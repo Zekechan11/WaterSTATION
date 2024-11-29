@@ -1,5 +1,74 @@
 <script setup>
+import { ref } from "vue";
 import ScrollTop from 'primevue/scrolltop';
+
+const products = ref([
+  {
+    id: 1,
+    name: 'Product 1',
+    image: 'bamboo-watch.jpg',
+    price: 65.0,
+    inventoryStatus: 'INSTOCK'
+  },
+  {
+    id: 2,
+    name: 'Product 2',
+    image: 'blue-t-shirt.jpg',
+    price: 39.0,
+    inventoryStatus: 'LOWSTOCK'
+  },
+  {
+    id: 3,
+    name: 'Product 3',
+    image: 'gaming-set.jpg',
+    price: 120.0,
+    inventoryStatus: 'OUTOFSTOCK'
+  },
+  {
+    id: 4,
+    name: 'Product 4',
+    image: 'laptop.jpg',
+    price: 950.0,
+    inventoryStatus: 'INSTOCK'
+  },
+  {
+    id: 5,
+    name: 'Product 5',
+    image: 'headphones.jpg',
+    price: 59.0,
+    inventoryStatus: 'INSTOCK'
+  },
+  {
+    id: 6,
+    name: 'Product 6',
+    image: 'camera.jpg',
+    price: 899.0,
+    inventoryStatus: 'LOWSTOCK'
+  }
+]);
+
+const responsiveOptions = ref([
+  {
+    breakpoint: '1400px',
+    numVisible: 2,
+    numScroll: 1
+  },
+  {
+    breakpoint: '1199px',
+    numVisible: 3,
+    numScroll: 1
+  },
+  {
+    breakpoint: '767px',
+    numVisible: 2,
+    numScroll: 1
+  },
+  {
+    breakpoint: '575px',
+    numVisible: 1,
+    numScroll: 1
+  }
+]);
 
 function smoothScroll(id) {
   document.body.click();
@@ -212,59 +281,29 @@ function smoothScroll(id) {
           <span class="text-muted-color text-2xl">What Our Customers Say</span>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-            <div class="flex items-center mb-4">
-              <img src="/demo/images/user.jpg" alt="" class="rounded-full mr-4"
-                style="height: 90px; width: 90px; object-fit: cover" />
-              <div>
-                <h5 class="font-bold text-surface-900 dark:text-surface-0">
-                  John Doe
-                </h5>
-                <p class="text-surface-700 dark:text-surface-100">
-                  Satisfied Customer
+        <Carousel :value="products" :numVisible="3" :numScroll="3" :responsiveOptions="responsiveOptions">
+          <template #item="slotProps">
+            <div class="rounded m-2">
+              <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                <div class="flex items-center mb-4">
+                  <img src="/demo/images/user.jpg" alt="" class="rounded-full mr-4"
+                    style="height: 90px; width: 90px; object-fit: cover" />
+                  <div>
+                    <h5 class="font-bold text-surface-900 dark:text-surface-0">
+                      John Doe
+                    </h5>
+                    <p class="text-surface-700 dark:text-surface-100">
+                      Satisfied Customer
+                    </p>
+                  </div>
+                </div>
+                <p class="text-surface-900 dark:text-surface-0 italic">
+                  "This service has transformed my life! Highly recommend."
                 </p>
               </div>
             </div>
-            <p class="text-surface-900 dark:text-surface-0 italic">
-              "This service has transformed my life! Highly recommend."
-            </p>
-          </div>
-
-          <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-            <div class="flex items-center mb-4">
-              <img src="/demo/images/user1.png" alt="Jane Smith" class="rounded-full mr-4"
-                style="height: 90px; width: 90px; object-fit: cover" />
-              <div>
-                <h5 class="font-bold text-surface-900 dark:text-surface-0">
-                  Jane Smith
-                </h5>
-                <p class="text-surface-700 dark:text-surface-100">
-                  Loyal Client
-                </p>
-              </div>
-            </div>
-            <p class="text-surface-900 dark:text-surface-0 italic">
-              "Amazing experience! The team is professional and friendly."
-            </p>
-          </div>
-
-          <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-            <div class="flex items-center mb-4">
-              <img src="/demo/images/user2.jpg" alt="Michael Johnson" class="rounded-full mr-4"
-                style="height: 90px; width: 90px; object-fit: cover" />
-              <div>
-                <h5 class="font-bold text-surface-900 dark:text-surface-0">
-                  Michael Johnson
-                </h5>
-                <p class="text-surface-700 dark:text-surface-100">Happy User</p>
-              </div>
-            </div>
-            <p class="text-surface-900 dark:text-surface-0 italic">
-              "I can't believe the difference it has made. A+ service!"
-            </p>
-          </div>
-        </div>
+          </template>
+        </Carousel>
       </div>
 
       <div id="delivery-schedules" class="py-6 px-6 lg:px-20 my-2 md:my-6">

@@ -1,12 +1,13 @@
 <script setup>
-
-import { useRouter } from 'vue-router';
-import AgentMenu from './AgentMenu.vue';
+import { useRouter } from "vue-router";
+import AgentMenu from "./AgentMenu.vue";
 
 const router = useRouter();
 
 const Logout = () => {
-    router.push('/auth/login');
+  localStorage.removeItem("token");
+  localStorage.removeItem("role");
+  router.push("/auth/login");
 };
 </script>
 
@@ -32,7 +33,7 @@ const Logout = () => {
   margin: 0;
   padding: 0;
   list-style-type: none;
-  
+
   font-weight: 400;
   color: var(--text-color);
   margin: 1.75rem 0;
@@ -41,5 +42,4 @@ const Logout = () => {
 .logout-button i {
   margin-right: 8px; // Adjust the space between the icon and the text
 }
-
 </style>
