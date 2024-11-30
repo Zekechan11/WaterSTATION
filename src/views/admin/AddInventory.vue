@@ -120,7 +120,7 @@ const deleteSelectedProducts = () => {
         </h1>
     </div>
     <div>
-        <div class="card">
+        <div class="card shadow-md">
             <Toolbar class="mb-6">
                 <template #start>
                     <Button label="New" icon="pi pi-plus" severity="success" class="mr-2" @click="openNew" />

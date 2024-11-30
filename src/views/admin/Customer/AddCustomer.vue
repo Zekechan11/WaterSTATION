@@ -151,35 +151,17 @@ const deleteSelectedProducts = () => {
     <div class="card shadow-md">
       <Toolbar class="mb-6">
         <template #start>
-          <Button
-            label="New"
-            icon="pi pi-plus"
-            severity="success"
-            class="mr-2"
-            @click="openNew"
-          />
-          <Button
-            label="Delete"
-            icon="pi pi-trash"
-            severity="danger"
-            @click="confirmDeleteSelected"
-            :disabled="!selectedProducts || !selectedProducts.length"
-          />
+          <Button label="New" icon="pi pi-plus" severity="success" class="mr-2" @click="openNew" />
+          <Button label="Delete" icon="pi pi-trash" severity="danger" @click="confirmDeleteSelected"
+            :disabled="!selectedProducts || !selectedProducts.length" />
         </template>
       </Toolbar>
 
-      <DataTable
-        ref="dt"
-        v-model:selection="selectedProducts"
-        :value="products"
-        dataKey="id"
-        :paginator="true"
-        :rows="10"
-        :filters="filters"
+      <DataTable ref="dt" v-model:selection="selectedProducts" :value="products" dataKey="id" :paginator="true"
+        :rows="10" :filters="filters"
         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
         :rowsPerPageOptions="[5, 10, 25]"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products"
-      >
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products">
         <template #header>
           <div class="flex flex-wrap gap-2 items-center justify-between">
             <h4 class="m-0">Manage Customer</h4>
@@ -187,45 +169,20 @@ const deleteSelectedProducts = () => {
               <InputIcon>
                 <i class="pi pi-search" />
               </InputIcon>
-              <InputText
-                v-model="filters['global'].value"
-                placeholder="Search..."
-              />
+              <InputText v-model="filters['global'].value" placeholder="Search..." />
             </IconField>
           </div>
         </template>
 
-        <Column
-          selectionMode="multiple"
-          style="width: 3rem"
-          :exportable="false"
-        ></Column>
-        <Column
-          field="name"
-          header="Name"
-          sortable
-          style="min-width: 12rem"
-        ></Column>
-        <Column
-          field="address"
-          header="Address"
-          sortable
-          style="min-width: 16rem"
-        ></Column>
-        <Column
-          field="status"
-          header="Status"
-          sortable
-          style="min-width: 16rem"
-        >
+        <Column selectionMode="multiple" style="width: 3rem" :exportable="false"></Column>
+        <Column field="name" header="Name" sortable style="min-width: 12rem"></Column>
+        <Column field="address" header="Address" sortable style="min-width: 16rem"></Column>
+        <Column field="status" header="Status" sortable style="min-width: 16rem">
           <template #body="slotProps">
-            <span
-              class="px-2 py-1 rounded text-white"
-              :style="{
-                backgroundColor:
-                  slotProps.data.status === 'Dealer' ? '#4CAF50' : '#FF5722',
-              }"
-            >
+            <span class="px-2 py-1 rounded text-white" :style="{
+              backgroundColor:
+                slotProps.data.status === 'Dealer' ? '#4CAF50' : '#FF5722',
+            }">
               {{ slotProps.data.status }}
             </span>
           </template>
@@ -233,59 +190,27 @@ const deleteSelectedProducts = () => {
 
         <Column :exportable="false" header="Actions" style="min-width: 12rem">
           <template #body="slotProps">
-            <Button
-              icon="pi pi-pencil"
-              outlined
-              rounded
-              class="mr-2"
-              @click="editProduct(slotProps.data)"
-            />
-            <Button
-              icon="pi pi-trash"
-              outlined
-              rounded
-              severity="danger"
-              @click="confirmDeleteProduct(slotProps.data)"
-            />
+            <Button icon="pi pi-pencil" v-tooltip.bottom="'Edit'" outlined rounded class="mr-2" @click="editProduct(slotProps.data)" />
+            <Button icon="pi pi-trash" v-tooltip.bottom="'Delete'" outlined rounded severity="danger"
+              @click="confirmDeleteProduct(slotProps.data)" />
           </template>
         </Column>
       </DataTable>
     </div>
 
-    <Dialog
-      v-model:visible="productDialog"
-      :style="{ width: '450px' }"
-      header="Add Customer"
-      :modal="true"
-    >
+    <Dialog v-model:visible="productDialog" :style="{ width: '450px' }" header="Add Customer" :modal="true">
       <div class="flex flex-col gap-6">
         <div>
           <label for="name" class="block font-bold mb-3">Name</label>
-          <InputText
-            id="name"
-            v-model.trim="product.name"
-            required="true"
-            autofocus
-            :invalid="submitted && !product.name"
-            fluid
-          />
-          <small v-if="submitted && !product.name" class="text-red-500"
-            >Name is required.</small
-          >
+          <InputText id="name" v-model.trim="product.name" required="true" autofocus
+            :invalid="submitted && !product.name" fluid />
+          <small v-if="submitted && !product.name" class="text-red-500">Name is required.</small>
         </div>
         <div>
           <label for="name" class="block font-bold mb-3">Address</label>
-          <InputText
-            id="name"
-            v-model.trim="product.address"
-            required="true"
-            autofocus
-            :invalid="submitted && !product.name"
-            fluid
-          />
-          <small v-if="submitted && !product.name" class="text-red-500"
-            >Name is required.</small
-          >
+          <InputText id="name" v-model.trim="product.address" required="true" autofocus
+            :invalid="submitted && !product.name" fluid />
+          <small v-if="submitted && !product.name" class="text-red-500">Name is required.</small>
         </div>
       </div>
 
@@ -295,55 +220,25 @@ const deleteSelectedProducts = () => {
       </template>
     </Dialog>
 
-    <Dialog
-      v-model:visible="deleteProductDialog"
-      :style="{ width: '450px' }"
-      header="Confirm"
-      :modal="true"
-    >
+    <Dialog v-model:visible="deleteProductDialog" :style="{ width: '450px' }" header="Confirm" :modal="true">
       <div class="flex items-center gap-4">
         <i class="pi pi-exclamation-triangle !text-3xl" />
-        <span v-if="product"
-          >Are you sure you want to delete <b>{{ product.name }}</b
-          >?</span
-        >
+        <span v-if="product">Are you sure you want to delete <b>{{ product.name }}</b>?</span>
       </div>
       <template #footer>
-        <Button
-          label="No"
-          icon="pi pi-times"
-          text
-          @click="deleteProductDialog = false"
-        />
+        <Button label="No" icon="pi pi-times" text @click="deleteProductDialog = false" />
         <Button label="Yes" icon="pi pi-check" @click="deleteProduct" />
       </template>
     </Dialog>
 
-    <Dialog
-      v-model:visible="deleteProductsDialog"
-      :style="{ width: '450px' }"
-      header="Confirm"
-      :modal="true"
-    >
+    <Dialog v-model:visible="deleteProductsDialog" :style="{ width: '450px' }" header="Confirm" :modal="true">
       <div class="flex items-center gap-4">
         <i class="pi pi-exclamation-triangle !text-3xl" />
-        <span v-if="product"
-          >Are you sure you want to delete the selected products?</span
-        >
+        <span v-if="product">Are you sure you want to delete the selected products?</span>
       </div>
       <template #footer>
-        <Button
-          label="No"
-          icon="pi pi-times"
-          text
-          @click="deleteProductsDialog = false"
-        />
-        <Button
-          label="Yes"
-          icon="pi pi-check"
-          text
-          @click="deleteSelectedProducts"
-        />
+        <Button label="No" icon="pi pi-times" text @click="deleteProductsDialog = false" />
+        <Button label="Yes" icon="pi pi-check" text @click="deleteSelectedProducts" />
       </template>
     </Dialog>
   </div>

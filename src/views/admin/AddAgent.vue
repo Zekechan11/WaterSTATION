@@ -163,8 +163,8 @@ const deleteSelectedProducts = () => {
   
                 <Column :exportable="false" header="Actions" style="min-width: 12rem;">
                     <template #body="slotProps">
-                        <Button icon="pi pi-pencil" outlined rounded class="mr-2" @click="editProduct(slotProps.data)" />
-                        <Button icon="pi pi-trash" outlined rounded severity="danger" @click="confirmDeleteProduct(slotProps.data)" />
+                        <Button icon="pi pi-pencil" v-tooltip.bottom="'Edit'" outlined rounded class="mr-2" @click="editProduct(slotProps.data)" />
+                        <Button icon="pi pi-trash" v-tooltip.bottom="'Delete'" outlined rounded severity="danger" @click="confirmDeleteProduct(slotProps.data)" />
                     </template>
                 </Column>
             </DataTable>

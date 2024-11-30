@@ -77,7 +77,8 @@ const toggleNotifications = () => {
             class="layout-topbar-action"
             @click="onCreateClick"
           >
-            <i class="pi pi-user-plus"></i>
+            <i class="pi pi-user-plus"
+            v-tooltip.bottom="'Create Customer'"></i>
             <span>Create Customer</span>
           </button>
 
@@ -87,7 +88,8 @@ const toggleNotifications = () => {
               class="layout-topbar-action"
               @click="toggleNotifications"
             >
-              <i class="pi pi-bell"></i>
+              <i class="pi pi-bell"
+              v-tooltip.bottom="'Notification'"></i>
               <span>Notification</span>
             </button>
             <span class="notification-badge">3</span>
@@ -112,8 +114,10 @@ const toggleNotifications = () => {
             type="button"
             class="layout-topbar-action"
             @click="onSettingsClick"
+            
           >
-            <i class="pi pi-user"></i>
+            <i class="pi pi-user"
+            v-tooltip.bottom="'Profile'"></i>
             <span>Profile</span>
           </button>
         </div>
