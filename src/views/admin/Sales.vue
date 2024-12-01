@@ -102,7 +102,7 @@ const filterByDate = () => {
             <!-- Display Collected Amount -->
             <Column field="collected" header="Collected Amount" style="min-width: 12rem">
                 <template #body="{ data }">
-                    {{ data.collected }}
+                    ₱ {{ data.collected }}
                 </template>
             </Column>
 
@@ -118,7 +118,7 @@ const filterByDate = () => {
         <div class="flex justify-end items-center p-4">
             <strong>Total Collected: </strong>
             <!-- Access totalCollected.value -->
-            <span class="ml-2">{{ totalCollected }}</span>
+            <span class="ml-2">₱ {{ totalCollected }}</span>
         </div>
     </div>
 </template>

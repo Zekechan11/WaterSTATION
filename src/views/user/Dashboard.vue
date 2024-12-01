@@ -60,8 +60,8 @@ function formatCurrency(value) {
     <div class="w-full space-y-8 md:w-2/3">
       <div class="flex items-center justify-between rounded-lg bg-blue-400 p-6 shadow-md">
         <div v-if="userData">
-          <h1 class="text-2xl font-bold"> {{ userData.firstName }} {{ userData.lastName }} !</h1>
-          <p class="mt-2 text-gray-800"> {{ userData.area }} </p>
+          <h1 class="text-2xl font-semibold"> {{ userData.firstName }} {{ userData.lastName }} !</h1>
+          <p class="mt-2 text-gray-800 font-semibold"> {{ userData.area }} </p>
         </div>
         <!-- QR Code Section -->
         <div v-if="userData" class="qr-code-container">
@@ -97,7 +97,7 @@ function formatCurrency(value) {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0-3a7 7 0 11-7 7 7 7 0 017-7z" />
               </svg>
             </div>
-            <div>
+            <div class="font-semibold">
               <h2 class="text-2xl font-semibold">Zeke</h2>
               <p class="text-sm text-gray-600">Agent</p>
             </div>
@@ -110,7 +110,7 @@ function formatCurrency(value) {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
               </svg>
             </div>
-            <div>
+            <div class="font-semibold">
               <h2 class="text-2xl font-semibold">50</h2>
               <p class="text-sm text-gray-600">Gallons on Hold</p>
             </div>
@@ -123,7 +123,7 @@ function formatCurrency(value) {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h8M8 11h4m-6 4h10a2 2 0 002-2V7a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2z" />
               </svg>
             </div>
-            <div>
+            <div class="font-semibold">
               <h2 class="text-2xl font-semibold">02/11/2020</h2>
               <p class="text-sm text-gray-600">Date</p>
             </div>
@@ -136,7 +136,7 @@ function formatCurrency(value) {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h8M8 11h4m-6 4h10a2 2 0 002-2V7a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2z" />
               </svg>
             </div>
-            <div>
+            <div class="font-semibold">
               <h2 class="text-2xl font-semibold">20</h2>
               <p class="text-sm text-gray-600">Purchased Gallons</p>
             </div>
@@ -149,7 +149,7 @@ function formatCurrency(value) {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h8M8 11h4m-6 4h10a2 2 0 002-2V7a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2z" />
               </svg>
             </div>
-            <div>
+            <div class="font-semibold">
               <h2 class="text-2xl font-semibold">{{ formatCurrency(16) }}</h2>
               <p class="text-sm text-gray-600">Amount Paid</p>
             </div>
@@ -162,7 +162,7 @@ function formatCurrency(value) {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h8M8 11h4m-6 4h10a2 2 0 002-2V7a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2z" />
               </svg>
             </div>
-            <div>
+            <div class="font-semibold">
               <h2 class="text-2xl font-semibold">{{ formatCurrency(16) }}</h2>
               <p class="text-sm text-gray-600">Amount Payable</p>
             </div>

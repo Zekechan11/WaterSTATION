@@ -72,14 +72,15 @@ const toggleNotifications = () => {
               class="layout-topbar-action"
               @click="toggleNotifications"
             >
-              <i class="pi pi-bell"></i>
-              <span>Notification</span>
+              <i class="pi pi-bell"
+              v-tooltip.bottom="'Notification'"></i>
+              <span class="font-semibold">Notification</span>
             </button>
             <span class="notification-badge">3</span>
 
             <div v-if="notificationsVisible" class="notification-dropdown">
               <div class="notification-dropdown-content">
-                <h4>Notifications</h4>
+                <h4 class="font-semibold">Notifications</h4>
                 <ul>
                   <li
                     v-for="notification in notifications"
@@ -98,8 +99,9 @@ const toggleNotifications = () => {
             class="layout-topbar-action"
             @click="onSettingsClick"
           >
-            <i class="pi pi-user"></i>
-            <span>Profile</span>
+            <i class="pi pi-user"
+            v-tooltip.bottom="'Profile'"></i>
+            <span class="font-semibold">Profile</span>
           </button>
         </div>
       </div>

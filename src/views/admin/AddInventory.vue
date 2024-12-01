@@ -115,7 +115,7 @@ const deleteSelectedProducts = () => {
 
 <template>
     <div class="space">
-        <h1 class="text-4xl font-bold mb-6" style="color: #899499;">
+        <h1 class="text-4xl font-semibold mb-6" style="color: #899499;">
             Inventory
         </h1>
     </div>
@@ -156,12 +156,12 @@ const deleteSelectedProducts = () => {
         <Dialog v-model:visible="productDialog" :style="{ width: '450px' }" header="Inventory" :modal="true">
             <div class="flex flex-col gap-6">
                 <div>
-                    <label for="name" class="block font-bold mb-3">Items</label>
+                    <label for="name" class="block font-semibold mb-3">Items</label>
                     <InputText id="name" v-model.trim="product.name" required="true" autofocus :invalid="submitted && !product.name" fluid />
                     <small v-if="submitted && !product.name" class="text-red-500">Name is required.</small>
                 </div>
                 <div>
-                    <label for="name" class="block font-bold mb-3">No of Items</label>
+                    <label for="name" class="block font-semibold mb-3">No of Items</label>
                     <InputText id="name" v-model.trim="product.code" required="true" autofocus :invalid="submitted && !product.name" fluid />
                     <small v-if="submitted && !product.name" class="text-red-500">Name is required.</small>
                 </div>

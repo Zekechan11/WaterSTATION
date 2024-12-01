@@ -26,7 +26,7 @@ const setActiveTab = (tab) => {
 <template>
   <Fluid>
     <div class="space">
-      <h1 class="text-4xl font-bold mb-4" style="color: #899499">Profile</h1>
+      <h1 class="text-4xl font-semibold mb-4" style="color: #899499">Profile</h1>
     </div>
 
     <div class="flex flex-col">

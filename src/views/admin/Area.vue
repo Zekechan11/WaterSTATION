@@ -117,7 +117,7 @@ const deleteSelectedProducts = () => {
 
 <template>
     <div class="space">
-        <h1 class="text-4xl font-bold mb-6" style="color: #899499;">
+        <h1 class="text-4xl font-semibold mb-6" style="color: #899499;">
             Area Data
         </h1>
     </div>
@@ -144,7 +144,7 @@ const deleteSelectedProducts = () => {
             >
                 <template #header>
                     <div class="flex flex-wrap gap-2 items-center justify-between">
-                        <h4 class="m-0">Manage Area</h4>
+                        <h4 class="m-0 font-semibold">Manage Area</h4>
                         <IconField>
                             <InputIcon>
                                 <i class="pi pi-search" />
@@ -169,7 +169,7 @@ const deleteSelectedProducts = () => {
         <Dialog v-model:visible="productDialog" :style="{ width: '450px' }" header="Add Area" :modal="true">
             <div class="flex flex-col gap-6">
                 <div>
-                    <label for="name" class="block font-bold mb-3">Area</label>
+                    <label for="name" class="block font-semibold mb-3">Area</label>
                     <InputText id="name" v-model.trim="product.name" required="true" autofocus :invalid="submitted && !product.name" fluid />
                     <small v-if="submitted && !product.name" class="text-red-500">Name is required.</small>
                 </div>

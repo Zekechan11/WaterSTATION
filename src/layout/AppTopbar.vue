@@ -79,7 +79,7 @@ const toggleNotifications = () => {
           >
             <i class="pi pi-user-plus"
             v-tooltip.bottom="'Create Customer'"></i>
-            <span>Create Customer</span>
+            <span class="font-semibold">Create Customer</span>
           </button>
 
           <div class="notification-container">
@@ -90,13 +90,13 @@ const toggleNotifications = () => {
             >
               <i class="pi pi-bell"
               v-tooltip.bottom="'Notification'"></i>
-              <span>Notification</span>
+              <span class="font-semibold">Notification</span>
             </button>
             <span class="notification-badge">3</span>
 
             <div v-if="notificationsVisible" class="notification-dropdown">
               <div class="notification-dropdown-content">
-                <h4>Notifications</h4>
+                <h4 class="font-semibold">Notifications</h4>
                 <ul>
                   <li
                     v-for="notification in notifications"
@@ -118,7 +118,7 @@ const toggleNotifications = () => {
           >
             <i class="pi pi-user"
             v-tooltip.bottom="'Profile'"></i>
-            <span>Profile</span>
+            <span class="font-semibold">Profile</span>
           </button>
         </div>
       </div>

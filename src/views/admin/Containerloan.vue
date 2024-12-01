@@ -35,6 +35,12 @@ const selectedProducts = ref();
 
 const submitted = ref(false);
 
+const agents = [
+    { label: "Zeke", value: "Zeke" },
+    { label: "Anton", value: "Anton" },
+    { label: "Jemar", value: "Jemar" },
+];
+
 const openNew = () => {
     product.value = {};
     submitted.value = false;
@@ -115,7 +121,7 @@ const deleteSelectedProducts = () => {
 
 <template>
     <div class="space">
-        <h1 class="text-4xl font-bold mb-6" style="color: #899499;">
+        <h1 class="text-4xl font-semibold mb-6" style="color: #899499;">
             Add Container on Loan
         </h1>
     </div>
@@ -156,7 +162,13 @@ const deleteSelectedProducts = () => {
         <Dialog v-model:visible="productDialog" :style="{ width: '450px' }" header="Container on Loan" :modal="true">
             <div class="flex flex-col gap-6">
                 <div>
-                    <label for="name" class="block font-bold mb-3">Add Loan</label>
+                    <label for="agent" class="block font-semibold mb-3">Agent</label>
+                    <Dropdown id="agent" v-model="product.name" :options="agents" optionLabel="label"
+                        placeholder="Select Agent" />
+                    <small v-if="submitted && !product.name" class="text-red-500">Agent is required.</small>
+                </div>
+                <div>
+                    <label for="name" class="block font-semibold mb-3">Add Loan</label>
                     <InputText id="name" v-model.trim="product.code" required="true" autofocus :invalid="submitted && !product.name" fluid />
                     <small v-if="submitted && !product.name" class="text-red-500">Name is required.</small>
                 </div>

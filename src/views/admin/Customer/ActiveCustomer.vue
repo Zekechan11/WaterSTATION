@@ -51,7 +51,7 @@ const dt = ref();
 
 <template>
     <div class="space">
-        <h1 class="text-4xl font-bold mb-6" style="color: #899499;">
+        <h1 class="text-4xl font-semibold mb-6" style="color: #899499;">
             Active Customer
         </h1>
     </div>
@@ -72,7 +72,7 @@ const dt = ref();
                 <Column field="address" header="Address" sortable style="min-width: 16rem"></Column>
                 <Column header="Status" style="min-width: 12rem">
                     <template #body="{ data }">
-                        <span class="status-active">Active</span>
+                        <span class="status-active font-semibold">Active</span>
                     </template>
                 </Column>
             </DataTable>

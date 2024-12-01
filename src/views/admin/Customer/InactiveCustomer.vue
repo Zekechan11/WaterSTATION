@@ -99,7 +99,7 @@ const filterCallback = () => {
 
 <template>
     <div class="space">
-        <h1 class="text-4xl font-bold mb-6" style="color: #899499;">
+        <h1 class="text-4xl font-semibold mb-6" style="color: #899499;">
             Inactive Customer
         </h1>
     </div>

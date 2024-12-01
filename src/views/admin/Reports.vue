@@ -49,7 +49,7 @@ const filterByDate = () => {
 
 
 <template>
-    <div class="card">
+    <div class="card shadow-md">
         <DataTable 
             :value="filteredCustomers" 
             paginator 
@@ -88,21 +88,23 @@ const filterByDate = () => {
                 </template>
             </Column>
 
-            <Column field="collected" header="Collected Amount" style="min-width: 12rem">
-                <template #body="{ data }">
-                    {{ data.collected }}
-                </template>
-            </Column>
+            
 
             <Column field="collected" header="Gallons Delivered" style="min-width: 12rem">
                 <template #body="{ data }">
-                    {{ data.collected }}
+                    {{ Math.round(data.collected) }}
                 </template>
             </Column>
             
             <Column field="collected" header="Gallons Collected" style="min-width: 12rem">
                 <template #body="{ data }">
-                    {{ data.collected }}
+                    {{ Math.round(data.collected) }}
+                </template>
+            </Column>
+
+            <Column field="collected" header="Collected Amount" style="min-width: 12rem">
+                <template #body="{ data }">
+                    ₱ {{ data.collected }}
                 </template>
             </Column>
 

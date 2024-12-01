@@ -3,3 +3,13 @@
 @import 'primeicons/primeicons.css';
 
 
+/* Global font-family settings */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+* {
+  font-family: inherit; /* Ensures all child elements inherit Poppins */
+}
+
+

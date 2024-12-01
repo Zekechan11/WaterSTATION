@@ -1,52 +1,52 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed, onMounted, onBeforeUnmount } from "vue";
 import ScrollTop from 'primevue/scrolltop';
 
 const products = ref([
   {
     id: 1,
-    name: 'Product 1',
-    image: 'bamboo-watch.jpg',
-    price: 65.0,
-    inventoryStatus: 'INSTOCK'
+    name: "John Doe",
+    title: "Satisfied Customer",
+    testimonial: "This service has transformed my life! Highly recommend.",
+    image: "/demo/images/user.jpg" // Update the image path as needed
   },
   {
     id: 2,
-    name: 'Product 2',
-    image: 'blue-t-shirt.jpg',
-    price: 39.0,
-    inventoryStatus: 'LOWSTOCK'
+    name: "Jane Smith",
+    title: "Happy Client",
+    testimonial: "Amazing experience! Will use again.",
+    image: "/demo/images/user2.jpg" // Update the image path as needed
   },
   {
     id: 3,
-    name: 'Product 3',
-    image: 'gaming-set.jpg',
-    price: 120.0,
-    inventoryStatus: 'OUTOFSTOCK'
+    name: "Alice Johnson",
+    title: "Regular Customer",
+    testimonial: "Top-notch service and support.",
+    image: "/demo/images/user.jpg" // Update the image path as needed
   },
   {
     id: 4,
-    name: 'Product 4',
-    image: 'laptop.jpg',
-    price: 950.0,
-    inventoryStatus: 'INSTOCK'
+    name: "Bob Brown",
+    title: "Loyal Customer",
+    testimonial: "Excellent quality and service.",
+    image: "/demo/images/user.jpg" // Update the image path as needed
   },
   {
     id: 5,
-    name: 'Product 5',
-    image: 'headphones.jpg',
-    price: 59.0,
-    inventoryStatus: 'INSTOCK'
+    name: "Mary White",
+    title: "Frequent User",
+    testimonial: "A game changer for my business.",
+    image: "/demo/images/user.jpg" // Update the image path as needed
   },
   {
     id: 6,
-    name: 'Product 6',
-    image: 'camera.jpg',
-    price: 899.0,
-    inventoryStatus: 'LOWSTOCK'
+    name: "Chris Green",
+    title: "Long-time User",
+    testimonial: "Incredible value and support!",
+    image: "/demo/images/user.jpg" // Update the image path as needed
   }
+  // Add more testimonials as needed
 ]);
-
 const responsiveOptions = ref([
   {
     breakpoint: '1400px',
@@ -70,6 +70,40 @@ const responsiveOptions = ref([
   }
 ]);
 
+const currentIndex = ref(0);
+
+const visibleProducts = computed(() => {
+  return products.value.slice(currentIndex.value, currentIndex.value + 3);
+});
+const next = () => {
+  currentIndex.value = (currentIndex.value + 3) % products.value.length;
+};
+
+const prev = () => {
+  currentIndex.value = (currentIndex.value - 3 + products.value.length) % products.value.length;
+};
+
+// Automatic sliding
+let intervalId;
+
+const startAutoSlide = () => {
+  intervalId = setInterval(() => {
+    next();
+  }, 3000); // Change slide every 5 seconds
+};
+
+const stopAutoSlide = () => {
+  clearInterval(intervalId);
+};
+
+  onMounted(() => {
+    startAutoSlide(); // Start the automatic slide when component is mounted
+  });
+
+onBeforeUnmount(() => {
+  stopAutoSlide(); // Stop the automatic slide when component is unmounted
+});
+
 function smoothScroll(id) {
   document.body.click();
   document.querySelector(id).scrollIntoView({
@@ -79,8 +113,6 @@ function smoothScroll(id) {
 </script>
 
 <template>
-  <ScrollTop :threshold="100" icon="pi pi-arrow-up"
-    :buttonProps="{ severity: 'info', raised: true, rounded: true, class: 'custom-scrolltop' }" />
   <div class="bg-surface-0 dark:bg-surface-900" style="background-color: #F0F8FF;">
     <div id="home" class="landing-wrapper overflow-hidden">
       <div
@@ -110,28 +142,28 @@ function smoothScroll(id) {
           style="background-color: #F0F8FF;">
           <ul class="list-none p-0 m-0 flex lg:items-center select-none flex-col lg:flex-row cursor-pointer gap-8">
             <li>
-              <a @click="smoothScroll('#hero')" class="menu-item">
+              <a @click="smoothScroll('#hero')" class="menu-item font-semibold">
                 <button text>Home</button>
               </a>
             </li>
             <li>
-              <a @click="smoothScroll('#aboutus')" class="menu-item">
+              <a @click="smoothScroll('#aboutus')" class="menu-item font-semibold">
                 <button text>About us</button>
               </a>
             </li>
 
             <li>
-              <a @click="smoothScroll('#testi')" class="menu-item">
+              <a @click="smoothScroll('#testi')" class="menu-item font-semibold">
                 <button text>Testimonials</button>
               </a>
             </li>
             <li>
-              <a @click="smoothScroll('#delivery-schedules')" class="menu-item">
+              <a @click="smoothScroll('#delivery-schedules')" class="menu-item font-semibold">
                 <button text>Schedules</button>
               </a>
             </li>
             <li>
-              <a @click="smoothScroll('#contact')" class="menu-item">
+              <a @click="smoothScroll('#contact')" class="menu-item font-semibold">
                 <button text>Contacts</button>
               </a>
             </li>
@@ -162,7 +194,7 @@ function smoothScroll(id) {
             opacity: 0.7;
         "></div>
         <div class="mx-6 md:mx-20 mt-0 md:mt-20 relative z-10">
-          <h1 class="text-7xl font-bold text-blue-500 leading-tight drop-shadow-sm"
+          <h1 class="text-7xl font-semibold text-blue-500 leading-tight drop-shadow-sm"
             style="position: relative; top: 100px;filter: drop-shadow(0 3px 2px rgb(0 0 0 / 0.6));">
             Welcome
             <span class="block">Home</span>
@@ -272,39 +304,49 @@ function smoothScroll(id) {
         </div>
       </div>
 
-      <div id="testi" class="py-6 px-6 lg:px-20 mt-8 mx-0 lg:mx-20"
-        style="background-color: #85c1e9; border-radius: 10px">
-        <div class="text-center mb-6">
-          <div class="text-surface-900 dark:text-surface-0 font-normal mb-2 text-4xl">
-            Testimonials
-          </div>
-          <span class="text-muted-color text-2xl">What Our Customers Say</span>
-        </div>
-
-        <Carousel :value="products" :numVisible="3" :numScroll="3" :responsiveOptions="responsiveOptions">
-          <template #item="slotProps">
-            <div class="rounded m-2">
-              <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
-                <div class="flex items-center mb-4">
-                  <img src="/demo/images/user.jpg" alt="" class="rounded-full mr-4"
-                    style="height: 90px; width: 90px; object-fit: cover" />
-                  <div>
-                    <h5 class="font-bold text-surface-900 dark:text-surface-0">
-                      John Doe
-                    </h5>
-                    <p class="text-surface-700 dark:text-surface-100">
-                      Satisfied Customer
-                    </p>
-                  </div>
-                </div>
-                <p class="text-surface-900 dark:text-surface-0 italic">
-                  "This service has transformed my life! Highly recommend."
-                </p>
-              </div>
-            </div>
-          </template>
-        </Carousel>
+      <div
+    id="testi"
+    class="py-6 px-6 lg:px-20 mt-8 mx-0 lg:mx-20"
+    style="background-color: #85c1e9; border-radius: 10px"
+  >
+    <div class="text-center mb-6">
+      <div class="text-surface-900 dark:text-surface-0 font-normal mb-2 text-4xl">
+        Testimonials
       </div>
+      <span class="text-muted-color text-2xl">What Our Customers Say</span>
+    </div>
+
+    <div class="testimonial-carousel">
+      <div
+        class="testimonial-container"
+        v-for="(product, index) in visibleProducts"
+        :key="product.id"
+      >
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md testimonial-box">
+          <div class="flex items-center mb-4">
+            <img
+              :src="product.image"
+              alt=""
+              class="rounded-full mr-4"
+              style="height: 90px; width: 90px; object-fit: cover"
+            />
+            <div>
+              <h5 class="font-semibold text-surface-900 dark:text-surface-0">
+                {{ product.name }}
+              </h5>
+              <p class="text-surface-700 dark:text-surface-100">
+                {{ product.title }}
+              </p>
+            </div>
+          </div>
+          <p class="text-surface-900 dark:text-surface-0 italic">
+            "{{ product.testimonial }}"
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 
       <div id="delivery-schedules" class="py-6 px-6 lg:px-20 my-2 md:my-6">
         <div class="text-center mb-6">
@@ -395,7 +437,7 @@ function smoothScroll(id) {
           <div class="col-span-12 md:col-span-10 mt-6">
             <div class="grid grid-cols-12 gap-8 text-center md:text-left">
               <div class="col-span-12 md:col-span-3">
-                <h4 class="font-bold text-2xl leading-normal mb-4 text-white text-surface-900 dark:text-surface-0">
+                <h4 class="font-semibold text-2xl leading-normal mb-4 text-white text-surface-900 dark:text-surface-0">
                   Resources
                 </h4>
                 <a
@@ -406,7 +448,7 @@ function smoothScroll(id) {
               </div>
 
               <div class="col-span-12 md:col-span-3">
-                <h4 class="font-bold text-2xl leading-normal mb-4 text-white text-surface-900 dark:text-surface-0">
+                <h4 class="font-semibold text-2xl leading-normal mb-4 text-white text-surface-900 dark:text-surface-0">
                   Community
                 </h4>
                 <a
@@ -418,7 +460,7 @@ function smoothScroll(id) {
               </div>
 
               <div class="col-span-12 md:col-span-3">
-                <h4 class="font-bold text-2xl leading-normal mb-4 text-white text-surface-900 dark:text-surface-0">
+                <h4 class="font-semibold text-2xl leading-normal mb-4 text-white text-surface-900 dark:text-surface-0">
                   Legal
                 </h4>
                 <a
@@ -430,7 +472,7 @@ function smoothScroll(id) {
               </div>
 
               <div class="col-span-12 md:col-span-3">
-                <h4 class="font-bold text-2xl leading-normal mb-4 text-white text-surface-900 dark:text-surface-0">
+                <h4 class="font-semibold text-2xl leading-normal mb-4 text-white text-surface-900 dark:text-surface-0">
                   Social
                 </h4>
                 <div class="flex flex-row space-x-4">
@@ -486,7 +528,7 @@ function smoothScroll(id) {
   /* Adjust as needed */
   height: 2px;
   /* Thickness of the underline */
-  background-color: #0e7deb;
+  background-color: #50a0f0;
   /* Color of the underline */
   transform: scaleX(0);
   /* Initially hide the underline */
@@ -506,5 +548,22 @@ function smoothScroll(id) {
   border-radius: 10px;
   overflow: hidden;
   margin-top: 20px;
+}
+
+.testimonial-carousel {
+  display: flex;
+  overflow: hidden; /* Hides overflow for a neat look */
+}
+
+.testimonial-container {
+  flex: 0 0 33.33%; /* Each testimonial takes up 1/3 of the container */
+  padding: 0 10px; /* Adds spacing between testimonials */
+}
+
+.testimonial-box {
+  height: 200px; /* Set a fixed height for all testimonial boxes */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Space out elements evenly */
 }
 </style>

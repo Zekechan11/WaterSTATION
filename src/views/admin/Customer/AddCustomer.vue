@@ -145,7 +145,7 @@ const deleteSelectedProducts = () => {
 
 <template>
   <div class="space">
-    <h1 class="text-4xl font-bold mb-6" style="color: #899499">Add Customer</h1>
+    <h1 class="text-4xl font-semibold mb-6" style="color: #899499">Add Customer</h1>
   </div>
   <div>
     <div class="card shadow-md">
@@ -164,7 +164,7 @@ const deleteSelectedProducts = () => {
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} products">
         <template #header>
           <div class="flex flex-wrap gap-2 items-center justify-between">
-            <h4 class="m-0">Manage Customer</h4>
+            <h4 class="m-0 font-semibold">Manage Customer</h4>
             <IconField>
               <InputIcon>
                 <i class="pi pi-search" />
@@ -201,13 +201,13 @@ const deleteSelectedProducts = () => {
     <Dialog v-model:visible="productDialog" :style="{ width: '450px' }" header="Add Customer" :modal="true">
       <div class="flex flex-col gap-6">
         <div>
-          <label for="name" class="block font-bold mb-3">Name</label>
+          <label for="name" class="block font-semibold mb-3">Name</label>
           <InputText id="name" v-model.trim="product.name" required="true" autofocus
             :invalid="submitted && !product.name" fluid />
           <small v-if="submitted && !product.name" class="text-red-500">Name is required.</small>
         </div>
         <div>
-          <label for="name" class="block font-bold mb-3">Address</label>
+          <label for="name" class="block font-semibold mb-3">Address</label>
           <InputText id="name" v-model.trim="product.address" required="true" autofocus
             :invalid="submitted && !product.name" fluid />
           <small v-if="submitted && !product.name" class="text-red-500">Name is required.</small>
