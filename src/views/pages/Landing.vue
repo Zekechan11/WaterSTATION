@@ -188,11 +188,13 @@ function smoothScroll(id) {
         clip-path: ellipse(150% 87% at 93% 14%);
         height: 100vh;
     ">
-        <div class="absolute inset-0" style="
-            background-image: url(&quot;https://kernwater.com/wp-content/uploads/2020/12/kern-4-of-12.jpg;);
-            background-size: cover;
-            opacity: 0.7;
-        "></div>
+        <div class="absolute inset-0"
+    style="
+        background-image: url('https://kernwater.com/wp-content/uploads/2020/12/kern-4-of-12.jpg');
+        background-size: cover;
+        opacity: 0.7;
+    ">
+</div>
         <div class="mx-6 md:mx-20 mt-0 md:mt-20 relative z-10">
           <h1 class="text-7xl font-semibold text-blue-500 leading-tight drop-shadow-sm"
             style="position: relative; top: 100px;filter: drop-shadow(0 3px 2px rgb(0 0 0 / 0.6));">
@@ -206,8 +208,7 @@ function smoothScroll(id) {
             transforms a basic necessity into a sustainable service, ensuring <br />
             every drop is accounted for and every customer is satisfied.
           </p>
-          <Button label="Get Started" as="router-link" to="/views/dashboard" severity="info" raised rounded
-            class="!text-xl mt-8 !px-4" style="position: relative; top: 100px"></Button>
+
         </div>
         <div class="flex justify-center md:justify-end">
           <img src="/demo/images/art.png" alt="Hero Image" style="
@@ -215,7 +216,7 @@ function smoothScroll(id) {
                 height: 450px;
                 position: relative;
                 left: 50px;
-                bottom: 120px;
+                bottom: 50px;
                 filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
             " />
         </div>

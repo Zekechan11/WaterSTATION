@@ -1,9 +1,10 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 
 const messages = ref([]);
 const newMessage = ref('');
-const selectedConversation = ref(null); // Tracks the selected conversation
+const selectedConversation = ref(null);
+const searchQuery = ref(''); // New reactive property for search query
 
 const conversations = ref([
     { name: 'Ricky Monsales', lastMessage: 'dol oh', time: '1m', img: 'https://i.pravatar.cc/100?u=ricky' },
@@ -19,6 +20,13 @@ const conversations = ref([
     { name: 'Gago', lastMessage: 'I miss you', time: '3h', img: 'https://i.pravatar.cc/100?u=gago' },
 ]);
 
+const filteredConversations = computed(() => {
+    if (!searchQuery.value) return conversations.value;
+    return conversations.value.filter(conversation =>
+        conversation.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+    );
+});
+
 // Limit the length of last messages to 40 characters
 const truncateMessage = (message, maxLength = 40) => {
     return message.length > maxLength ? message.slice(0, maxLength) + '...' : message;
@@ -28,19 +36,17 @@ function sendMessage() {
     if (newMessage.value.trim() !== '') {
         messages.value.push({
             content: newMessage.value,
-            sender: 'user', // Can be 'user' or 'bot' or others based on your use case
+            sender: 'user',
             timestamp: new Date().toLocaleTimeString(),
         });
         newMessage.value = '';
     }
 }
 
-// Function to select a conversation when clicked
 function selectConversation(conversation) {
     selectedConversation.value = conversation;
 }
 
-// Automatically select the first conversation when the component mounts
 onMounted(() => {
     if (conversations.value.length > 0) {
         selectedConversation.value = conversations.value[0];
@@ -56,6 +62,7 @@ onMounted(() => {
             <div class="p-4 bg-white">
                 <input
                     type="text"
+                    v-model="searchQuery" 
                     placeholder="Search Messenger"
                     class="w-full p-2 rounded-lg border border-gray-300"
                 />
@@ -63,7 +70,7 @@ onMounted(() => {
             <!-- Scrollable conversation list -->
             <div class="overflow-y-auto flex-grow max-h-[520px]">
                 <div
-                    v-for="(conversation, index) in conversations"
+                    v-for="(conversation, index) in filteredConversations"
                     :key="index"
                     @click="selectConversation(conversation)"
                     :class="['p-4 border-b cursor-pointer', 
@@ -86,7 +93,6 @@ onMounted(() => {
         <div v-if="selectedConversation" class="md:w-full flex flex-col h-[620px] border border-gray-300 rounded-lg shadow-md">
             <div class="bg-blue-500 text-white font-semibold text-xl p-4 rounded-t-lg">{{ selectedConversation.name }}</div>
             <div class="flex-grow p-4 overflow-y-auto space-y-4">
-                <!-- Messages Loop -->
                 <div v-for="(msg, index) in messages" :key="index" class="flex flex-col space-y-1">
                     <div v-if="msg.sender === 'user'" class="self-end bg-blue-500 text-white p-2 rounded-lg max-w-xs">
                         <p>{{ msg.content }}</p>
